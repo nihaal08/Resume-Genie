@@ -22,7 +22,6 @@
             --border-radius: 12px;
             --navbar-dark-bg: rgba(30, 41, 59, 0.95);
         }
-
         [data-theme="dark"] {
             --primary-color: #a78bfa;
             --secondary-color: #c084fc;
@@ -36,7 +35,6 @@
             --shadow-lg: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -2px rgba(255, 255, 255, 0.05);
             --navbar-dark-bg: rgba(15, 23, 42, 0.95);
         }
-
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, var(--bg-light) 0%, #e2e8f0 100%);
@@ -45,32 +43,27 @@
             min-height: 100vh;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-
         .navbar {
             background: var(--white);
             box-shadow: var(--shadow-sm);
             padding: 1rem 0;
             transition: background-color 0.3s ease;
         }
-
         .navbar-brand {
             font-weight: 700;
             color: var(--primary-color) !important;
             font-size: 1.5rem;
         }
-
         .navbar-nav .nav-link {
             color: var(--text-dark);
             transition: color 0.3s ease;
             padding: 0.5rem 1rem;
             border-radius: 8px;
         }
-
         .navbar-nav .nav-link:hover {
             color: var(--primary-color);
             background-color: rgba(99, 102, 241, 0.1);
         }
-
         .dark-mode-toggle {
             cursor: pointer;
             font-size: 1.2rem;
@@ -79,19 +72,16 @@
             padding: 0.5rem;
             border-radius: 50%;
         }
-
         .dark-mode-toggle:hover {
             color: var(--primary-color);
             background-color: rgba(99, 102, 241, 0.1);
         }
-
         .hero-section {
             padding: 120px 0 80px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
-
         .hero-section::before {
             content: '';
             position: absolute;
@@ -102,14 +92,12 @@
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(0,0,0,0.03)"/><circle cx="75" cy="75" r="1" fill="rgba(0,0,0,0.03)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
             opacity: 0.5;
         }
-
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
         }
-
         .hero-section h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
@@ -119,7 +107,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .hero-section .lead {
             font-size: 1.25rem;
             color: var(--text-light);
@@ -128,14 +115,18 @@
             margin-left: auto;
             margin-right: auto;
         }
-
+        .tools-intro {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
         .tools-grid {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 3rem;
         }
-
         .tool-card {
             background: var(--white);
             border-radius: var(--border-radius);
@@ -149,29 +140,24 @@
             align-items: center;
             justify-content: center;
         }
-
         .tool-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg), 0 20px 40px -10px rgba(99, 102, 241, 0.3);
         }
-
         .tool-card i {
             font-size: 3rem;
             color: var(--primary-color);
             margin-bottom: 1rem;
         }
-
         .tool-card h3 {
             font-weight: 600;
             color: var(--text-dark);
             margin-bottom: 1rem;
         }
-
         .tool-card p {
             color: var(--text-light);
             margin-bottom: 1.5rem;
         }
-
         .btn-tool {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             border: none;
@@ -184,36 +170,30 @@
             text-decoration: none;
             display: inline-block;
         }
-
         .btn-tool:hover {
             transform: translateY(-1px);
             box-shadow: var(--shadow-lg);
             color: var(--white);
             text-decoration: none;
         }
-
         .tool-sections {
             padding: 40px 0;
         }
-
         .about-section {
             padding: 80px 0;
             background: var(--white);
             margin-top: 100px;
         }
-
         .about-content {
             max-width: 800px;
             margin: 0 auto;
         }
-
         .about-content h2 {
             font-weight: 700;
             color: var(--text-dark);
             margin-bottom: 2rem;
             text-align: center;
         }
-
         .about-card {
             background: var(--bg-light);
             border-radius: var(--border-radius);
@@ -221,12 +201,10 @@
             margin-bottom: 2rem;
             box-shadow: var(--shadow-md);
         }
-
         .about-card h4 {
             color: var(--primary-color);
             margin-bottom: 1rem;
         }
-
         .form-container {
             background: var(--white);
             border-radius: var(--border-radius);
@@ -235,13 +213,11 @@
             max-width: 600px;
             margin: 0 auto 3rem;
         }
-
         .form-label {
             font-weight: 500;
             color: var(--text-dark);
             margin-bottom: 0.5rem;
         }
-
         .form-control, .form-select, .form-control[readonly] {
             border: 2px solid #e5e7eb;
             border-radius: 8px;
@@ -251,18 +227,15 @@
             background-color: var(--white);
             color: var(--text-dark);
         }
-
         .form-control:focus, .form-select:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
             outline: none;
         }
-
         .form-control[readonly] {
             background-color: #f9fafb;
             color: var(--text-light);
         }
-
         .btn-primary {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             border: none;
@@ -275,19 +248,16 @@
             box-shadow: var(--shadow-md);
             color: white;
         }
-
         .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: var(--shadow-lg);
             background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
         }
-
         .alert {
             border-radius: 8px;
             border: none;
             margin-bottom: 1.5rem;
         }
-
         .results-section {
             background: var(--white);
             border-radius: var(--border-radius);
@@ -295,7 +265,6 @@
             box-shadow: var(--shadow-lg);
             margin-bottom: 3rem;
         }
-
         .results-section h2 {
             font-weight: 600;
             color: var(--text-dark);
@@ -304,7 +273,6 @@
             align-items: center;
             gap: 0.5rem;
         }
-
         .score-badge {
             display: inline-block;
             padding: 0.5rem 1rem;
@@ -313,16 +281,13 @@
             font-size: 1.2rem;
             margin-bottom: 1rem;
         }
-
         .score-high { background: linear-gradient(135deg, #10b981, #059669); color: white; }
         .score-medium { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
         .score-low { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
-
         .issues-list {
             list-style: none;
             padding: 0;
         }
-
         .issues-list li {
             padding: 1rem;
             border-radius: 8px;
@@ -330,16 +295,6 @@
             background: #f8fafc;
             border-left: 4px solid var(--primary-color);
         }
-
-        .cover-letter {
-            background: var(--bg-light);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            white-space: pre-wrap;
-            font-family: 'Times New Roman', serif;
-            line-height: 1.8;
-        }
-
         .troll-section {
             background: #fef3c7;
             border-radius: var(--border-radius);
@@ -347,7 +302,6 @@
             margin: 1rem 0;
             border-left: 4px solid #f59e0b;
         }
-
         .recruiter-section {
             background: #dbeafe;
             border-radius: var(--border-radius);
@@ -355,7 +309,6 @@
             margin: 1rem 0;
             border-left: 4px solid var(--primary-color);
         }
-
         /* Loading Overlay */
         .loading-overlay {
             position: fixed;
@@ -370,31 +323,26 @@
             justify-content: center;
             backdrop-filter: blur(4px);
         }
-
         .loading-content {
             text-align: center;
             padding: 2rem;
         }
-
         .spinner-border {
             color: var(--primary-color);
             width: 3rem;
             height: 3rem;
             animation: spin 1s linear infinite;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
         .loading-text {
             color: var(--text-dark);
             font-size: 1.1rem;
             margin-top: 1rem;
             font-weight: 500;
         }
-
         /* Footer */
         .footer {
             background: var(--white);
@@ -404,38 +352,31 @@
             color: var(--text-light);
             margin-top: auto;
         }
-
         .footer a {
             color: var(--primary-color);
             text-decoration: none;
             margin: 0 0.5rem;
         }
-
         .footer a:hover {
             text-decoration: underline;
         }
-
         /* Responsive */
         @media (max-width: 768px) {
             .hero-section {
                 padding: 80px 0 60px;
             }
-
             .form-container {
                 padding: 2rem;
                 margin: 0 1rem 3rem;
             }
-
             .tools-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-
             .results-section {
                 padding: 2rem;
                 margin: 0 1rem 3rem;
             }
-
             .navbar-nav {
                 margin-top: 1rem;
             }
@@ -463,13 +404,12 @@
             </div>
         </div>
     </nav>
-
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="container">
             <div class="hero-content">
                 <h1>Supercharge Your Career with Resume-Genie</h1>
-                <p class="lead">Leverage cutting-edge AI to optimize your resume for ATS systems, get honest feedback with a humorous twist, and craft personalized cover letters that stand out in a competitive job market.</p>
+                <p class="lead">Leverage cutting-edge AI to optimize your resume for ATS systems and get honest feedback with a humorous twist to stand out in a competitive job market.</p>
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                         {% for category, message in messages %}
@@ -480,7 +420,9 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-
+                <div class="tools-intro">
+                    <p>Discover our suite of AI-powered tools designed to elevate your job search. Each tool provides instant, actionable insights tailored to your professional needs, helping you navigate the complexities of modern recruitment with confidence and ease.</p>
+                </div>
                 <!-- Tools Grid -->
                 <div class="tools-grid">
                     <div class="tool-card">
@@ -488,7 +430,7 @@
                         <h3>ATS Score Checker</h3>
                         <p>Analyze your resume against job descriptions for ATS compatibility, receive a precise score, and get tailored recommendations to enhance your application's visibility.</p>
                         <a href="#ats-tool" class="btn-tool">
-                            <i class="fas fa-arrow-right me-2"></i>Start ATS Analysis
+                            <i class="fas fa-arrow-right me-2"></i>Begin Analysis
                         </a>
                     </div>
                     <div class="tool-card">
@@ -496,22 +438,13 @@
                         <h3>Resume Roast & Review</h3>
                         <p>Discover potential pitfalls in your resume through witty critiques and gain insights into recruiter perspectives for a well-rounded improvement strategy.</p>
                         <a href="#resume-tool" class="btn-tool">
-                            <i class="fas fa-arrow-right me-2"></i>Review My Resume
-                        </a>
-                    </div>
-                    <div class="tool-card">
-                        <i class="fas fa-file-alt"></i>
-                        <h3>Cover Letter Builder</h3>
-                        <p>Generate a compelling, customized cover letter that highlights your strengths and aligns perfectly with the job requirements.</p>
-                        <a href="#cover-tool" class="btn-tool">
-                            <i class="fas fa-arrow-right me-2"></i>Build Cover Letter
+                            <i class="fas fa-arrow-right me-2"></i>Start Review
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- Tool Sections -->
     <div class="tool-sections">
         <!-- ATS Tool Section -->
@@ -534,7 +467,6 @@
                 </form>
             </div>
         </section>
-
         <!-- Resume Tool Section -->
         <section id="resume-tool" class="container mb-5" style="display: none;">
             <div class="form-container">
@@ -551,29 +483,7 @@
                 </form>
             </div>
         </section>
-
-        <!-- Cover Letter Tool Section -->
-        <section id="cover-tool" class="container mb-5" style="display: none;">
-            <div class="form-container">
-                <h3 class="text-center mb-4"><i class="fas fa-file-alt text-primary me-2"></i>Cover Letter Generator</h3>
-                <form method="POST" enctype="multipart/form-data" id="cover-form">
-                    {{ cover_form.hidden_tag() }}
-                    <input type="hidden" name="form_type" value="cover">
-                    <div class="mb-3">
-                        {{ cover_form.job_description.label(class="form-label") }}
-                        {{ cover_form.job_description(class="form-control", rows=5, placeholder="Paste the full job description here...") }}
-                    </div>
-                    <div class="mb-3">
-                        {{ cover_form.resume.label(class="form-label") }}
-                        {{ cover_form.resume(class="form-control") }}
-                        <div class="form-text">Supported formats: PDF or TXT</div>
-                    </div>
-                    {{ cover_form.submit(class="btn btn-primary") }}
-                </form>
-            </div>
-        </section>
     </div>
-
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
@@ -581,7 +491,7 @@
                 <h2>Empowering Your Professional Journey with Resume-Genie</h2>
                 <div class="about-card">
                     <h4><i class="fas fa-rocket text-primary me-2"></i>How It Works</h4>
-                    <p>Resume-Genie harnesses advanced natural language processing powered by Google's Gemini model to deliver precise, actionable insights. Simply upload your resume and provide a job description for tailored analyses—whether it's optimizing for ATS filters, uncovering hidden flaws with humor, or crafting a standout cover letter. Each tool processes your inputs securely and generates professional-grade outputs in seconds, ensuring confidentiality and accuracy every step of the way.</p>
+                    <p>Resume-Genie harnesses advanced natural language processing powered by Google's Gemini model to deliver precise, actionable insights. Simply upload your resume and provide a job description for tailored analyses—whether it's optimizing for ATS filters or uncovering hidden flaws with humor. Each tool processes your inputs securely and generates professional-grade outputs in seconds, ensuring confidentiality and accuracy every step of the way.</p>
                 </div>
                 <div class="about-card">
                     <h4><i class="fas fa-lightbulb text-primary me-2"></i>Why Choose Resume-Genie?</h4>
@@ -589,7 +499,7 @@
                 </div>
                 <div class="about-card">
                     <h4><i class="fas fa-users text-primary me-2"></i>The Need We Address</h4>
-                    <p>The job market is tougher than ever, with 75% of resumes rejected by ATS before human eyes see them. Recruiters spend mere seconds scanning applications, and generic cover letters blend into the noise. Resume-Genie bridges these gaps by providing specialized, AI-enhanced tools that not only identify issues but also offer creative, implementable solutions—saving you time and increasing your chances of landing interviews.</p>
+                    <p>The job market is tougher than ever, with 75% of resumes rejected by ATS before human eyes see them. Recruiters spend mere seconds scanning applications. Resume-Genie bridges these gaps by providing specialized, AI-enhanced tools that not only identify issues but also offer creative, implementable solutions—saving you time and increasing your chances of landing interviews.</p>
                 </div>
                 <div class="about-card">
                     <h4><i class="fas fa-award text-primary me-2"></i>Our Commitment</h4>
@@ -598,7 +508,6 @@
             </div>
         </div>
     </section>
-
     <!-- Results Section -->
     {% if ats_results %}
     <section class="container">
@@ -621,7 +530,6 @@
         </div>
     </section>
     {% endif %}
-
     {% if resume_results %}
     <section class="container">
         <div class="results-section">
@@ -647,18 +555,6 @@
         </div>
     </section>
     {% endif %}
-
-    {% if cover_results %}
-    <section class="container">
-        <div class="results-section">
-            <h2><i class="fas fa-file-alt text-success me-2"></i>Generated Cover Letter</h2>
-            <div class="cover-letter">
-                {{ cover_results.cover_letter }}
-            </div>
-        </div>
-    </section>
-    {% endif %}
-
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loading-overlay">
         <div class="loading-content">
@@ -668,14 +564,12 @@
             <div class="loading-text">Processing your request... Excellence takes a moment.</div>
         </div>
     </div>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 Resume-Genie. Empowering professionals worldwide with AI-driven career tools. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a> | <a href="#">Support</a></p>
         </div>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Dark Mode Toggle
@@ -686,7 +580,6 @@
             toggle.classList.toggle('fa-moon');
             toggle.classList.toggle('fa-sun');
         });
-
         // Tool toggles
         document.querySelectorAll('.btn-tool').forEach(btn => {
             btn.addEventListener('click', function(e) {
@@ -697,14 +590,12 @@
                 document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
             });
         });
-
         // Show loading on form submit
-        ['ats-form', 'resume-form', 'cover-form'].forEach(id => {
+        ['ats-form', 'resume-form'].forEach(id => {
             document.getElementById(id)?.addEventListener('submit', function() {
                 document.getElementById('loading-overlay').style.display = 'flex';
             });
         });
-
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.querySelector('.navbar');
@@ -717,7 +608,6 @@
                 navbar.style.backdropFilter = 'none';
             }
         });
-
         // Smooth scrolling for nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
