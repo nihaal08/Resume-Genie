@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import time
 from io import BytesIO
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_wtf import FlaskForm
@@ -11,6 +12,7 @@ from werkzeug.utils import secure_filename
 import google.generativeai as genai
 import pdfplumber
 from dotenv import load_dotenv
+from google.api_core.exceptions import ResourceExhausted, TooManyRequests
 load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key-change-me')
@@ -54,6 +56,19 @@ def extract_json(text):
         print(f"JSON decode error: {e}")
         print(f"Raw response snippet: {text[:200]}...")  # For debugging
         return None
+def generate_with_retry(model, prompt, max_retries=3, initial_delay=1):
+    for attempt in range(max_retries):
+        try:
+            response = model.generate_content(prompt)
+            return response
+        except (ResourceExhausted, TooManyRequests) as e:
+            if attempt < max_retries - 1:
+                delay = initial_delay * (2 ** attempt)  # Exponential backoff
+                print(f"Rate limit hit on attempt {attempt + 1}. Retrying in {delay} seconds...")
+                time.sleep(delay)
+            else:
+                raise e
+    raise ResourceExhausted("Max retries exceeded for API call.")
 def analyze_ats_with_gemini(job_desc, resume_text):
     prompt = f"""You are an ATS (Applicant Tracking System) expert and resume optimizer. Analyze the resume against the job description and provide a compatibility score (0-100) and 4-6 key issues with fixes.
 Criteria:
@@ -74,29 +89,34 @@ Output ONLY valid JSON: {{
 Job Description: {job_desc[:2000]}
 Resume: {resume_text[:4000]}
 """
-    response = model.generate_content(prompt)
-    result = extract_json(response.text)
-    if result is None:
-        # Fallback only if extraction fails
-        return {
-            "score": 65,
-            "issues": [
-                {"category": "Keywords", "description": "Missing key skills like 'Python'.", "fix": "Incorporate relevant keywords from the job description naturally into your resume."},
-                {"category": "Structure", "description": "Possible tables or graphics detected.", "fix": "Convert to simple text-based formatting for better ATS parsing."},
-                {"category": "Experience", "description": "Lacks quantifiable achievements.", "fix": "Include metrics, e.g., 'increased sales by 20%' to demonstrate impact."},
-                {"category": "Length", "description": "Resume exceeds optimal length.", "fix": "Condense to 1-2 pages by prioritizing recent and relevant experience."}
-            ]
-        }
-    return result
+    try:
+        response = generate_with_retry(model, prompt)
+        result = extract_json(response.text)
+        if result is None:
+            # Fallback only if extraction fails
+            return {
+                "score": 65,
+                "issues": [
+                    {"category": "Keywords", "description": "Missing key skills like 'Python'.", "fix": "Incorporate relevant keywords from the job description naturally into your resume."},
+                    {"category": "Structure", "description": "Possible tables or graphics detected.", "fix": "Convert to simple text-based formatting for better ATS parsing."},
+                    {"category": "Experience", "description": "Lacks quantifiable achievements.", "fix": "Include metrics, e.g., 'increased sales by 20%' to demonstrate impact."},
+                    {"category": "Length", "description": "Resume exceeds optimal length.", "fix": "Condense to 1-2 pages by prioritizing recent and relevant experience."}
+                ]
+            }
+        return result
+    except (ResourceExhausted, TooManyRequests) as e:
+        flash('API rate limit exceeded. Please wait a few minutes and try again. For more details, check your Gemini API quota.', 'error')
+        return None
 def analyze_resume_with_gemini(resume_text):
     prompt = f"""You are a witty resume reviewer with a troll/humorous edge, but also provide serious recruiter insights. Analyze the resume for 4-6 common mistakes (typos, gaps, vague language, etc.) and what a recruiter might think (pros/cons).
-For mistakes: Humorous, exaggerated descriptions.
+For mistakes: Humorous, exaggerated titles and descriptions that are still clear and point to real issues. Also include a practical fix for each.
 For recruiter thoughts: Realistic, balanced perspectives.
 Output ONLY valid JSON: {{
     "mistakes": [
         {{
             "title": "str (e.g., 'Typos Galore')",
-            "description": "str (funny troll commentary)"
+            "description": "str (funny but understandable troll commentary)",
+            "fix": "str (clear, actionable suggestion)"
         }}
     ],
     "recruiter_thoughts": [
@@ -108,11 +128,15 @@ Output ONLY valid JSON: {{
 }}
 Resume: {resume_text[:4000]}
 """
-    response = model.generate_content(prompt)
-    result = extract_json(response.text)
-    if result is None:
+    try:
+        response = generate_with_retry(model, prompt)
+        result = extract_json(response.text)
+        if result is None:
+            return None
+        return result
+    except (ResourceExhausted, TooManyRequests) as e:
+        flash('API rate limit exceeded. Please wait a few minutes and try again. For more details, check your Gemini API quota.', 'error')
         return None
-    return result
 @app.route('/', methods=['GET', 'POST'])
 def index():
     ats_form = ATSToolForm()
@@ -131,6 +155,8 @@ def index():
             return redirect(url_for('index'))
         job_desc = ats_form.job_description.data
         ats_results = analyze_ats_with_gemini(job_desc, resume_text)
+        if ats_results is None:
+            return redirect(url_for('index'))
         os.remove(file_path)
     elif form_type == 'resume' and resume_form.validate_on_submit():
         filename = secure_filename(resume_form.resume.data.filename)
@@ -143,7 +169,7 @@ def index():
             return redirect(url_for('index'))
         resume_results = analyze_resume_with_gemini(resume_text)
         if resume_results is None:
-            flash('Error generating AI feedback. Please try again.', 'error')
+            return redirect(url_for('index'))
         os.remove(file_path)
     return render_template('index.html', ats_form=ats_form, resume_form=resume_form, ats_results=ats_results, resume_results=resume_results)
 if __name__ == '__main__':

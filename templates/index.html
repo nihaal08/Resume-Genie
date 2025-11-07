@@ -3,51 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume-Genie</title>
+    <title>Resume-Genie - AI-Powered Resume Optimization</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --accent-color: #06b6d4;
-            --text-dark: #1f2937;
+            --primary-color: #1e40af;
+            --secondary-color: #3b82f6;
+            --accent-color: #10b981;
+            --text-dark: #111827;
             --text-light: #6b7280;
-            --bg-light: #f8fafc;
+            --bg-light: #f9fafb;
             --white: #ffffff;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --border-radius: 12px;
-            --navbar-dark-bg: rgba(30, 41, 59, 0.95);
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --navbar-bg: rgba(255, 255, 255, 0.95);
         }
         [data-theme="dark"] {
-            --primary-color: #a78bfa;
-            --secondary-color: #c084fc;
-            --accent-color: #60a5fa;
-            --text-dark: #f1f5f9;
-            --text-light: #cbd5e1;
-            --bg-light: #0f172a;
-            --white: #1e293b;
-            --shadow-sm: 0 1px 2px 0 rgba(255, 255, 255, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(255, 255, 255, 0.1), 0 2px 4px -1px rgba(255, 255, 255, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -2px rgba(255, 255, 255, 0.05);
-            --navbar-dark-bg: rgba(15, 23, 42, 0.95);
+            --primary-color: #60a5fa;
+            --secondary-color: #93c5fd;
+            --accent-color: #34d399;
+            --text-dark: #f9fafb;
+            --text-light: #d1d5db;
+            --bg-light: #1f2937;
+            --white: #111827;
+            --shadow-sm: 0 1px 3px 0 rgba(255, 255, 255, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(255, 255, 255, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(255, 255, 255, 0.05);
+            --navbar-bg: rgba(17, 24, 39, 0.95);
         }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--bg-light) 0%, #e2e8f0 100%);
+            background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
-            min-height: 100vh;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         .navbar {
-            background: var(--white);
+            background: var(--navbar-bg);
             box-shadow: var(--shadow-sm);
             padding: 1rem 0;
-            transition: background-color 0.3s ease;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
         .navbar-brand {
             font-weight: 700;
@@ -56,13 +56,12 @@
         }
         .navbar-nav .nav-link {
             color: var(--text-dark);
+            font-weight: 500;
             transition: color 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            padding: 0.5rem 1rem !important;
         }
         .navbar-nav .nav-link:hover {
             color: var(--primary-color);
-            background-color: rgba(99, 102, 241, 0.1);
         }
         .dark-mode-toggle {
             cursor: pointer;
@@ -71,215 +70,187 @@
             transition: color 0.3s ease;
             padding: 0.5rem;
             border-radius: 50%;
+            border: 1px solid transparent;
         }
         .dark-mode-toggle:hover {
             color: var(--primary-color);
-            background-color: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary-color);
         }
         .hero-section {
-            padding: 120px 0 80px;
+            padding: 100px 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, var(--white) 0%, var(--bg-light) 100%);
         }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(0,0,0,0.03)"/><circle cx="75" cy="75" r="1" fill="rgba(0,0,0,0.03)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
-            opacity: 0.5;
-        }
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-        .hero-section h1 {
+        .hero-content h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
         }
-        .hero-section .lead {
+        .hero-content .lead {
             font-size: 1.25rem;
             color: var(--text-light);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
-        .tools-intro {
-            max-width: 600px;
-            margin: 0 auto 3rem;
-            color: var(--text-light);
-            font-size: 1.1rem;
-        }
-        .tools-grid {
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
-        .tool-card {
+        .feature-card {
             background: var(--white);
             border-radius: var(--border-radius);
             padding: 2.5rem;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
             text-align: center;
             transition: all 0.3s ease;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
         }
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg), 0 20px 40px -10px rgba(99, 102, 241, 0.3);
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
         }
-        .tool-card i {
+        .feature-card i {
             font-size: 3rem;
             color: var(--primary-color);
             margin-bottom: 1rem;
         }
-        .tool-card h3 {
+        .feature-card h3 {
             font-weight: 600;
             color: var(--text-dark);
             margin-bottom: 1rem;
         }
-        .tool-card p {
+        .feature-card p {
             color: var(--text-light);
-            margin-bottom: 1.5rem;
         }
-        .btn-tool {
+        .cta-button {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             border: none;
-            border-radius: 8px;
-            padding: 0.875rem 2rem;
+            border-radius: var(--border-radius);
+            padding: 1rem 2rem;
             font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.2s ease;
             color: var(--white);
             text-decoration: none;
             display: inline-block;
-        }
-        .btn-tool:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-lg);
-            color: var(--white);
-            text-decoration: none;
-        }
-        .tool-sections {
-            padding: 40px 0;
-        }
-        .about-section {
-            padding: 80px 0;
-            background: var(--white);
-            margin-top: 100px;
-        }
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .about-content h2 {
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-        .about-card {
-            background: var(--bg-light);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            margin-bottom: 2rem;
+            transition: all 0.3s ease;
             box-shadow: var(--shadow-md);
         }
-        .about-card h4 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: var(--white);
+        }
+        .tool-sections {
+            padding: 80px 0;
+            background: var(--bg-light);
         }
         .form-container {
             background: var(--white);
             border-radius: var(--border-radius);
-            padding: 2.5rem;
+            padding: 3rem;
             box-shadow: var(--shadow-lg);
             max-width: 600px;
-            margin: 0 auto 3rem;
+            margin: 0 auto;
         }
         .form-label {
             font-weight: 500;
             color: var(--text-dark);
             margin-bottom: 0.5rem;
         }
-        .form-control, .form-select, .form-control[readonly] {
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 0.75rem 1rem;
-            transition: all 0.2s ease;
+        .form-control {
+            border: 1px solid #d1d5db;
+            border-radius: var(--border-radius);
+            padding: 0.875rem 1rem;
+            transition: all 0.3s ease;
             font-size: 1rem;
             background-color: var(--white);
             color: var(--text-dark);
         }
-        .form-control:focus, .form-select:focus {
+        .form-control:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
             outline: none;
-        }
-        .form-control[readonly] {
-            background-color: #f9fafb;
-            color: var(--text-light);
         }
         .btn-primary {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             border: none;
-            border-radius: 8px;
-            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            padding: 0.875rem 2rem;
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
+            font-size: 1rem;
+            transition: all 0.3s ease;
             width: 100%;
             box-shadow: var(--shadow-md);
             color: white;
         }
         .btn-primary:hover {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
         }
-        .alert {
-            border-radius: 8px;
-            border: none;
-            margin-bottom: 1.5rem;
+        .about-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .about-content h2 {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .about-card {
+            background: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+        .about-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+        .about-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .results-section {
             background: var(--white);
             border-radius: var(--border-radius);
-            padding: 2.5rem;
+            padding: 3rem;
             box-shadow: var(--shadow-lg);
-            margin-bottom: 3rem;
+            margin: 2rem auto;
+            max-width: 800px;
         }
         .results-section h2 {
             font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         .score-badge {
             display: inline-block;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
         }
         .score-high { background: linear-gradient(135deg, #10b981, #059669); color: white; }
         .score-medium { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
@@ -289,10 +260,10 @@
             padding: 0;
         }
         .issues-list li {
-            padding: 1rem;
-            border-radius: 8px;
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
             margin-bottom: 1rem;
-            background: #f8fafc;
+            background: var(--bg-light);
             border-left: 4px solid var(--primary-color);
         }
         .troll-section {
@@ -302,6 +273,13 @@
             margin: 1rem 0;
             border-left: 4px solid #f59e0b;
         }
+        .troll-section small {
+            display: block;
+            margin-top: 0.75rem;
+            color: #92400e;
+            font-style: italic;
+            font-weight: 500;
+        }
         .recruiter-section {
             background: #dbeafe;
             border-radius: var(--border-radius);
@@ -309,7 +287,6 @@
             margin: 1rem 0;
             border-left: 4px solid var(--primary-color);
         }
-        /* Loading Overlay */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -343,42 +320,40 @@
             margin-top: 1rem;
             font-weight: 500;
         }
-        /* Footer */
         .footer {
-            background: var(--white);
-            border-top: 1px solid #e5e7eb;
+            background: var(--text-dark);
+            color: var(--text-light);
             padding: 2rem 0;
             text-align: center;
-            color: var(--text-light);
-            margin-top: auto;
         }
         .footer a {
-            color: var(--primary-color);
+            color: var(--secondary-color);
             text-decoration: none;
             margin: 0 0.5rem;
         }
         .footer a:hover {
             text-decoration: underline;
         }
-        /* Responsive */
+        .alert {
+            border-radius: var(--border-radius);
+            border: none;
+            margin-bottom: 1.5rem;
+        }
         @media (max-width: 768px) {
             .hero-section {
-                padding: 80px 0 60px;
+                padding: 60px 0;
             }
             .form-container {
                 padding: 2rem;
-                margin: 0 1rem 3rem;
+                margin: 0 1rem;
             }
-            .tools-grid {
+            .features-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
             .results-section {
                 padding: 2rem;
-                margin: 0 1rem 3rem;
-            }
-            .navbar-nav {
-                margin-top: 1rem;
+                margin: 0 1rem 2rem;
             }
         }
     </style>
@@ -396,7 +371,7 @@
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                 </ul>
-                <ul class="navbar-nav ms-2">
+                <ul class="navbar-nav ms-3">
                     <li class="nav-item">
                         <i class="fas fa-moon dark-mode-toggle" id="dark-mode-toggle" title="Toggle Dark Mode"></i>
                     </li>
@@ -408,8 +383,8 @@
     <section id="home" class="hero-section">
         <div class="container">
             <div class="hero-content">
-                <h1>Supercharge Your Career with Resume-Genie</h1>
-                <p class="lead">Leverage cutting-edge AI to optimize your resume for ATS systems and get honest feedback with a humorous twist to stand out in a competitive job market.</p>
+                <h1>Optimize Your Resume with AI Precision</h1>
+                <p class="lead">Harness advanced AI to ensure your resume passes ATS filters and captivates recruiters. Get data-driven insights and witty feedback to elevate your job applications.</p>
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                         {% for category, message in messages %}
@@ -420,25 +395,21 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-                <div class="tools-intro">
-                    <p>Discover our suite of AI-powered tools designed to elevate your job search. Each tool provides instant, actionable insights tailored to your professional needs, helping you navigate the complexities of modern recruitment with confidence and ease.</p>
-                </div>
-                <!-- Tools Grid -->
-                <div class="tools-grid">
-                    <div class="tool-card">
+                <div class="features-grid">
+                    <div class="feature-card">
                         <i class="fas fa-search"></i>
-                        <h3>ATS Score Checker</h3>
-                        <p>Analyze your resume against job descriptions for ATS compatibility, receive a precise score, and get tailored recommendations to enhance your application's visibility.</p>
-                        <a href="#ats-tool" class="btn-tool">
-                            <i class="fas fa-arrow-right me-2"></i>Begin Analysis
+                        <h3>ATS Compatibility Analysis</h3>
+                        <p>Scan your resume against job postings to identify keyword gaps, structural issues, and optimization opportunities for maximum visibility.</p>
+                        <a href="#ats-tool" class="cta-button mt-3">
+                            Start ATS Scan
                         </a>
                     </div>
-                    <div class="tool-card">
-                        <i class="fas fa-grin-tongue"></i>
-                        <h3>Resume Roast & Review</h3>
-                        <p>Discover potential pitfalls in your resume through witty critiques and gain insights into recruiter perspectives for a well-rounded improvement strategy.</p>
-                        <a href="#resume-tool" class="btn-tool">
-                            <i class="fas fa-arrow-right me-2"></i>Start Review
+                    <div class="feature-card">
+                        <i class="fas fa-comments"></i>
+                        <h3>Expert Resume Review</h3>
+                        <p>Receive candid, humorous critiques alongside professional recruiter perspectives to refine your narrative and strengthen your profile.</p>
+                        <a href="#resume-tool" class="cta-button mt-3">
+                            Get Reviewed
                         </a>
                     </div>
                 </div>
@@ -450,7 +421,7 @@
         <!-- ATS Tool Section -->
         <section id="ats-tool" class="container mb-5" style="display: none;">
             <div class="form-container">
-                <h3 class="text-center mb-4"><i class="fas fa-search text-primary me-2"></i>ATS Compatibility Analyzer</h3>
+                <h2 class="text-center mb-4"><i class="fas fa-chart-line text-primary me-2"></i>ATS Compatibility Analyzer</h2>
                 <form method="POST" enctype="multipart/form-data" id="ats-form">
                     {{ ats_form.hidden_tag() }}
                     <input type="hidden" name="form_type" value="ats">
@@ -470,7 +441,7 @@
         <!-- Resume Tool Section -->
         <section id="resume-tool" class="container mb-5" style="display: none;">
             <div class="form-container">
-                <h3 class="text-center mb-4"><i class="fas fa-grin-tongue text-primary me-2"></i>Resume Review & Insights</h3>
+                <h2 class="text-center mb-4"><i class="fas fa-comments text-primary me-2"></i>Resume Review & Insights</h2>
                 <form method="POST" enctype="multipart/form-data" id="resume-form">
                     {{ resume_form.hidden_tag() }}
                     <input type="hidden" name="form_type" value="resume">
@@ -484,46 +455,22 @@
             </div>
         </section>
     </div>
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="container">
-            <div class="about-content">
-                <h2>Empowering Your Professional Journey with Resume-Genie</h2>
-                <div class="about-card">
-                    <h4><i class="fas fa-rocket text-primary me-2"></i>How It Works</h4>
-                    <p>Resume-Genie harnesses advanced natural language processing powered by Google's Gemini model to deliver precise, actionable insights. Simply upload your resume and provide a job description for tailored analyses—whether it's optimizing for ATS filters or uncovering hidden flaws with humor. Each tool processes your inputs securely and generates professional-grade outputs in seconds, ensuring confidentiality and accuracy every step of the way.</p>
-                </div>
-                <div class="about-card">
-                    <h4><i class="fas fa-lightbulb text-primary me-2"></i>Why Choose Resume-Genie?</h4>
-                    <p>In a sea of generic resume tools, Resume-Genie stands out by blending cutting-edge AI with human-centric design. Unlike basic keyword matchers, our system understands context, quantifies relevance, and injects personality into feedback to keep you engaged. We're built for the modern job seeker: fast, intuitive, and results-driven. Join thousands of professionals who've boosted their application success rates by up to 40% using our insights.</p>
-                </div>
-                <div class="about-card">
-                    <h4><i class="fas fa-users text-primary me-2"></i>The Need We Address</h4>
-                    <p>The job market is tougher than ever, with 75% of resumes rejected by ATS before human eyes see them. Recruiters spend mere seconds scanning applications. Resume-Genie bridges these gaps by providing specialized, AI-enhanced tools that not only identify issues but also offer creative, implementable solutions—saving you time and increasing your chances of landing interviews.</p>
-                </div>
-                <div class="about-card">
-                    <h4><i class="fas fa-award text-primary me-2"></i>Our Commitment</h4>
-                    <p>Developed by a team of AI experts and career coaches, Resume-Genie is more than a tool—it's a career accelerator. We prioritize data privacy (no storage of uploads), continuous improvement via user feedback, and accessibility for all levels of professionals. What sets us apart? Transparent AI outputs, downloadable professional reports, and a user experience that's as polished as the resumes we help create.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Results Section -->
+    <!-- Results Sections -->
     {% if ats_results %}
     <section class="container">
         <div class="results-section">
             <h2><i class="fas fa-chart-line text-primary me-2"></i>ATS Compatibility Report</h2>
             <div class="text-center mb-4">
                 <span class="score-badge {{ 'score-high' if ats_results.score >= 80 else 'score-medium' if ats_results.score >= 60 else 'score-low' }}">
-                    {{ ats_results.score }}% ATS Match
+                    {{ ats_results.score }}% Match Score
                 </span>
             </div>
-            <h4>Identified Issues & Professional Recommendations</h4>
+            <h4>Key Issues & Recommendations</h4>
             <ul class="issues-list">
                 {% for issue in ats_results.issues %}
                 <li>
                     <strong>{{ issue.category }}:</strong> {{ issue.description }}<br>
-                    <small><em>Recommendation: {{ issue.fix }}</em></small>
+                    <small><em>{{ issue.fix }}</em></small>
                 </li>
                 {% endfor %}
             </ul>
@@ -533,18 +480,19 @@
     {% if resume_results %}
     <section class="container">
         <div class="results-section">
-            <h2><i class="fas fa-fire text-warning me-2"></i>Resume Insights & Feedback</h2>
+            <h2><i class="fas fa-comments text-primary me-2"></i>Resume Review Insights</h2>
             <div class="row">
-                <div class="col-md-6">
-                    <h4><i class="fas fa-grin-tongue text-warning"></i> Constructive Critiques</h4>
+                <div class="col-lg-6">
+                    <h4><i class="fas fa-lightbulb text-warning me-2"></i>Actionable Improvements</h4>
                     {% for mistake in resume_results.mistakes %}
                     <div class="troll-section">
                         <strong>{{ mistake.title }}:</strong> {{ mistake.description }}
+                        <small>{{ mistake.fix }}</small>
                     </div>
                     {% endfor %}
                 </div>
-                <div class="col-md-6">
-                    <h4><i class="fas fa-user-tie text-primary"></i> Recruiter Perspectives</h4>
+                <div class="col-lg-6">
+                    <h4><i class="fas fa-user-tie text-success me-2"></i>Recruiter Viewpoint</h4>
                     {% for thought in resume_results.recruiter_thoughts %}
                     <div class="recruiter-section">
                         <strong>{{ thought.title }}:</strong> {{ thought.description }}
@@ -555,19 +503,45 @@
         </div>
     </section>
     {% endif %}
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <h2>Why Resume-Genie?</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <h4><i class="fas fa-cogs"></i> Powered by AI</h4>
+                        <p>Leveraging Google's Gemini model for accurate, context-aware analysis that goes beyond simple keyword matching.</p>
+                    </div>
+                    <div class="about-card">
+                        <h4><i class="fas fa-shield-alt"></i> Secure & Private</h4>
+                        <p>Your data is processed in real-time with no storage—ensuring complete confidentiality for your professional documents.</p>
+                    </div>
+                    <div class="about-card">
+                        <h4><i class="fas fa-bolt"></i> Instant Results</h4>
+                        <p>Get comprehensive feedback in seconds, saving you hours of manual revisions and boosting your application success.</p>
+                    </div>
+                    <div class="about-card">
+                        <h4><i class="fas fa-users"></i> Trusted by Professionals</h4>
+                        <p>Join thousands who have refined their resumes and landed interviews faster with our proven tools.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loading-overlay">
         <div class="loading-content">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
-            <div class="loading-text">Processing your request... Excellence takes a moment.</div>
+            <div class="loading-text">Analyzing your resume...</div>
         </div>
     </div>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Resume-Genie. Empowering professionals worldwide with AI-driven career tools. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a> | <a href="#">Support</a></p>
+            <p>&copy; 2025 Resume-Genie. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact</a></p>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -581,7 +555,7 @@
             toggle.classList.toggle('fa-sun');
         });
         // Tool toggles
-        document.querySelectorAll('.btn-tool').forEach(btn => {
+        document.querySelectorAll('a[href^="#ats-tool"], a[href^="#resume-tool"]').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = this.getAttribute('href');
@@ -596,25 +570,15 @@
                 document.getElementById('loading-overlay').style.display = 'flex';
             });
         });
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            const isDark = body.dataset.theme === 'dark';
-            if (window.scrollY > 50) {
-                navbar.style.background = isDark ? 'var(--navbar-dark-bg)' : 'rgba(255, 255, 255, 0.95)';
-                navbar.style.backdropFilter = 'blur(10px)';
-            } else {
-                navbar.style.background = 'var(--white)';
-                navbar.style.backdropFilter = 'none';
-            }
-        });
         // Smooth scrolling for nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
